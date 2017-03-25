@@ -342,7 +342,7 @@
 <blockquote>
 <p>YOUR-GITHUB-USERNAME.github.io</p>
 </blockquote>
-<p><img src="http://haiquan.github.io/images/how-to-set-up-your-blog-on-github/2017-03-11_131552.png" alt="Create a new repository"></p>
+<p><img src="http://haiquan.github.io/images/how-to-set-up-your-blog-on-github/2017-03-11_131552.png" alt="创建一个新的仓库"></p>
 <p>至此，空间已经建好了，下面我们看看怎么发布内容到Github上去。</p>
 <h1 id="发布内容"><a href="#发布内容" class="headerlink" title="发布内容"></a>发布内容</h1><p>既然利用的是Github的空间，那么自然会用到Git。</p>
 <h2 id="配置Git环境"><a href="#配置Git环境" class="headerlink" title="配置Git环境"></a>配置Git环境</h2><p>首先需要下载安装Git。然后打开Git Bash，使用如下命令生成SSH密钥</p>
@@ -367,6 +367,59 @@
 <li>输入git clone git@github.com:{your username}/{your username}.github.io.git</li>
 </ol>
 <h2 id="添加内容"><a href="#添加内容" class="headerlink" title="添加内容"></a>添加内容</h2><p>这时候，你就可以按照自己的想法，把自己写好的静态文件放到这个仓库下，然后使用Git Bash把新添加的内容推送到远程仓库里。具体命令我就不写了，大家可以翻翻Git手册。</p>
+<p>至此，一个免费且好用的博客就建好了，打开浏览器，输入网址，看看效果。嗯，已经可以正常工作了。但是总感觉还差点什么。嗯，博客没有自己的模版……<br>自己写模版？太麻烦，还是上网搜搜吧，应该有现成的解决方案。</p>
+<h1 id="使用Hexo维护博客"><a href="#使用Hexo维护博客" class="headerlink" title="使用Hexo维护博客"></a>使用Hexo维护博客</h1><p>Hexo是使用Node.js开发的，所以我们需要安装和配置Node.js的开发环境。</p>
+<h2 id="配置Node-js环境"><a href="#配置Node-js环境" class="headerlink" title="配置Node.js环境"></a>配置Node.js环境</h2><ol>
+<li>下载Node.js安装包。访问<a href="https://nodejs.org/" target="_blank" rel="external">Node.js官网</a>，选择你喜欢的版本（x32/x64, 安装包/压缩包）。</li>
+<li>安装配置Node.js。<ul>
+<li>如果你选择的是安装包，那么你不需要配置环境变量。</li>
+<li>如果你选择的是压缩包，那需要你自己配置环境变量，就是把nodejs文件夹的路径加入到系统的环境变量Path中。</li>
+</ul>
+</li>
+</ol>
+<p>完成上面两步后，咱们来测试一下，node.js是否可以正常工作。打开命令行窗口（Win+R，输入cmd），然后输入<strong>node -v</strong>和<strong>npm -v</strong>。如果效果如下，说明安装成功。</p>
+<p><img src="http://haiquan.github.io/images/how-to-set-up-your-blog-on-github/2017-03-25_191518.png" alt="检测Nodejs安装环境"></p>
+<h2 id="安装配置Hexo"><a href="#安装配置Hexo" class="headerlink" title="安装配置Hexo"></a>安装配置Hexo</h2><h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>还是利用刚才打开的命令行窗口，输入如下命令安装Hexo。</p>
+<blockquote>
+<p>npm install -g hexo-cli</p>
+</blockquote>
+<p>安装完成后，使用如下命令检测是否安装成功</p>
+<blockquote>
+<p>hexo</p>
+</blockquote>
+<p>看到如下输出内容，说明安装成功。</p>
+<p><img src="http://haiquan.github.io/images/how-to-set-up-your-blog-on-github/2017-03-25_192053.png" alt="检测Hexo"></p>
+<p>###　初始化博客<br>还是利用刚才的命令行窗口，输入如下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo init &lt;博客文件夹名称&gt;</div><div class="line"><span class="built_in">cd</span> &lt;博客文件夹名称&gt;</div><div class="line">npm install</div></pre></td></tr></table></figure></p>
+<p>完成上述命令，博客已经初始化完毕了。</p>
+<h3 id="配置部署"><a href="#配置部署" class="headerlink" title="配置部署"></a>配置部署</h3><p>进入博客文件夹，编辑文件<strong>_config.yml</strong>，找到<strong># Deployment</strong>，加入如下内容。</p>
+<blockquote>
+<p>deploy:<br>type: git<br>repo:  git@github.com:{your username}/{your username}.github.io.git<br>branch: master</p>
+</blockquote>
+<h3 id="新建博客"><a href="#新建博客" class="headerlink" title="新建博客"></a>新建博客</h3><p>还是利用刚才的命令行窗口，输入如下命令</p>
+<blockquote>
+<p>hexo new “文章标题”</p>
+</blockquote>
+<p>然后我们看到source-&gt;_posts文件夹下已经有了刚才创建的文章对应的md文件。然后我们就可以利用Markdown语法编辑文章了。</p>
+<h3 id="生成网站"><a href="#生成网站" class="headerlink" title="生成网站"></a>生成网站</h3><p>还是利用刚才的命令行窗口，输入如下命令</p>
+<blockquote>
+<p>hexo g</p>
+</blockquote>
+<p>此时，hexo会根据source-&gt;_posts文件夹的md文件生成对应的静态HTML文件。然后我们可以使用如下启动本地服务器。</p>
+<blockquote>
+<p>hexo s</p>
+</blockquote>
+<p>打开浏览器，输入如下URL，查看效果。</p>
+<blockquote>
+<p>　<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a></p>
+</blockquote>
+<h3 id="部署网站"><a href="#部署网站" class="headerlink" title="部署网站"></a>部署网站</h3><p>如果感觉效果还OK，我们就可以部署我们的博客了。由于前面已经配置过Git环境，所以可以使用如下命令发布博文。</p>
+<blockquote>
+<p>hexo deploy</p>
+</blockquote>
+<p>打开浏览器，输入如下URL，查看效果。</p>
+<blockquote>
+<p>　<a href="https://{your" target="_blank" rel="external">https://{your</a> name}.github.io</p>
+</blockquote>
 
           
         
